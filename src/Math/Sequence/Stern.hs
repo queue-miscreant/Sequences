@@ -29,11 +29,9 @@ calkinWilf = calkinWilf' (1 :% 1)
 
 --construct rational number of continued fraction
 --remember to use takes of infinite sequences
-continued []     = infinity
+continued :: Integral a => [a] -> Ratio a
+continued []     = 1 :% 0 --don't think about the infinity too much
 continued (x:xs) = (x :% 1) + (recip $ continued xs)
-
-continuedr []     = infinity --don't think about the infinity too much
-continuedr (x:xs) = x + (recip $ continuedr xs)
 
 --inverse of `continued`
 --create continued fraction representation from rational number
@@ -43,9 +41,9 @@ uncontinued (a :% b) = q:uncontinued (b :% r)
   where (q,r) = a `divMod` b
 
 --continued fraction with additional control over the numerator
-continued2 xs = continued2' xs
-  where continued2' []         = 1 :% 0 --don't think about the infinity too much
-        continued2' ((x,y):xs) = (x :% 1) + (y :% 1) / (continued2' xs)
+continued2 :: Integral a => [(a,a)] -> Ratio a
+continued2 []         = 1 :% 0 
+continued2 ((x,y):xs) = (x :% 1) + (y :% 1) / (continued2 xs)
 
 --simple continued fraction for doubles
 continuedf :: Floating a => [a] -> a

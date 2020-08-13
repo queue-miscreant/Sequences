@@ -1,5 +1,5 @@
-import Seq
-import Stern
+import Math.Sequence.Sequence
+import Math.Sequence.Stern
 
 --interpret a boolean sequence as a binary number
 binseq = foldl (\x y -> 2*x + y) 0 
@@ -28,13 +28,13 @@ kola2 = map binseq $ slices $ map (fromEnum . (==1)) kolakoski
 --generate a sequence based on a (boolean) function of adjacent pairs of the translated sequence
 transformKola f = slices $ (\xs -> zipWith f xs (tail xs)) kolakoski
 kolaBits = map (binseq . map fromEnum) . transformKola
---the kolakoski sequence appears to obey equality cycle (<=, <=, >)
---this sequence matches OEIS A033129
-kolaLe = kolaBits (<=)
 
 --certain equalities match cellular automata for the first few terms
 --diverges from rules 91 and 25 after 8 terms (OEIS A267045, A266446)
 kolaLt = kolaBits (<)
+
+--the kolakoski sequence initially appears to obey equality cycle (<=, <=, >)
+kolaLe = kolaBits (<=)
 
 --matches no known sequence in OEIS
 kolaEq = kolaBits (==)
