@@ -1,5 +1,7 @@
 module Math.Sequence.Sequence where
 
+import Prelude
+
 --most of this file is functions I assembled for analysis of certain sequences
 
 --ratio between successive entries of a list

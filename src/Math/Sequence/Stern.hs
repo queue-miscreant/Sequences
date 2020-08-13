@@ -1,6 +1,7 @@
 --module for stern-brocot-like functions
 module Math.Sequence.Stern where
 
+import Prelude
 import GHC.Real
 
 --stern-brocot rational number builder

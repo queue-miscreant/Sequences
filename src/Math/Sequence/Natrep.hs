@@ -1,6 +1,8 @@
 --module for manipulating representations of natural numbers
 module Math.Sequence.Natrep where
 
+import Prelude
+
 --if xs is some representation of natural numbers, then
 --returns those natural numbers `x` for which `f x` is `True`
 --note that "notSatisfying" is not equivalent to applying (not . f)

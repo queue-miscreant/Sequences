@@ -4,7 +4,7 @@ cabal-version:       >=1.10
 -- http://haskell.org/cabal/users-guide/
 
 name:                Sequence-Tools
-version:             0.1.0.0
+version:             0.1.0.1
 synopsis:            Various mathematical sequence functions
 -- description:
 -- bug-reports:
