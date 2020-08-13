@@ -1,6 +1,6 @@
 import Math.GenBase.Recur
 import Math.GenBase.Base
-import Seq
+import Math.Sequence.Sequence
 
 bad_descend a = iterate (frombasef a . read . show) a
 descend a = iterate (tobasef a . frombasef a) . read $ show a

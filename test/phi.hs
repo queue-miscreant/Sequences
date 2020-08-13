@@ -1,4 +1,5 @@
 import Data.Ratio
+import Control.Monad (guard)
 
 import Math.GenBase.Recur
 import Math.GenBase.Base
@@ -8,6 +9,12 @@ import Math.Sequence.Natrep
 floatRound = 1e-10
 
 palindrome = (==) <*> reverse
+
+--safe rounding for almost-integers
+close :: (RealFrac a, Integral b) => a -> a -> Maybe b
+close r x = do let x' = round x
+               guard $ (<r) $ abs $ x - fromIntegral x'
+               return x'
 
 --calculate the exact root for a Lucas recurrence
 --the Left value is for rational roots
