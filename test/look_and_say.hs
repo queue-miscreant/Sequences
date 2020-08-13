@@ -1,4 +1,4 @@
-import Seq (commonRatio, converge)
+import Math.Sequence.Sequence (succRat, converge)
 
 --look-and-say sequence generator from a particular seed
 --i.e. "1" -> "11" -> "21"...
