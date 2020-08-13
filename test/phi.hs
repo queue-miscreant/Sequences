@@ -1,11 +1,13 @@
 import Data.Ratio
 
-import Recur
-import Base
-import Seq
-import Natrep
+import Math.GenBase.Recur
+import Math.GenBase.Base
+import Math.Sequence.Sequence
+import Math.Sequence.Natrep
 
 floatRound = 1e-10
+
+palindrome = (==) <*> reverse
 
 --calculate the exact root for a Lucas recurrence
 --the Left value is for rational roots
