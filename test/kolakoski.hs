@@ -1,14 +1,15 @@
+import Math.GenBase.Base
+
 import Math.Sequence.Sequence
 import Math.Sequence.Stern
 
---interpret a boolean sequence as a binary number
-binseq = foldl (\x y -> 2*x + y) 0 
-revbinseq = sum . zipWith (*) (iterate (*2) 1)
+--interpret sequence as a binary number
+binseq = frombasei (2 :: Int) --foldl (\x y -> 2*x + y) 0 
+revbinseq = frombasei (2 :: Int) . reverse --sum . zipWith (*) (iterate (*2) 1)
 
---interpret a sequence of -1, 0, and 1 as a balanced ternary number
-tern :: Integral a => [a] -> a
-tern = foldl (\x y -> 3*x + y) 0 
-revtern = sum . zipWith (*) (iterate (*3) 1)
+--interpret sequence as a ternary number
+tern = frombasei (3 :: Int) --foldl (\x y -> 3*x + y) 0 
+revtern = frombasei (3 :: Int) . reverse --sum . zipWith (*) (iterate (*3) 1)
 
 --kolakoski sequence; uses itself as a sort of instruction tape
 --kolakoski = 1:2:(genK (drop 2 kolakoski) 2 True)
@@ -64,9 +65,11 @@ kolaContinued   = map continued $ slices kolakoski
 --backandforth [1, 1, m, n] converges for n>=1
 --backandforth [2, 1, n] converges for n>=1
 --backandforth [3, 1, n] converges for n>=1
-backandforth  = map continued . iterate (map (2-) . unSternBrocot . continued)
-backandforth' = map continued . iterate (map (+1) . unSternBrocot . continued)
+backandforth' f = map continued . iterate there
+  where there = map (fromIntegral . f) . unSternBrocot . continued
+backandforth  = backandforth' (2-)
+backandforthr = backandforth' (+1)
 
 --a - 1/b (in the limit) is 1, by definition of the sequence and continued fraction
-a = precision $ (!!) $ map fromRational $ backandforth [5]
-b = precision $ (!!) $ map fromRational $ backandforth' [5]
+a = precision $ (!!) $ map fromRational $ backandforth  [5]
+b = precision $ (!!) $ map fromRational $ backandforthr [5]
